@@ -1,0 +1,26 @@
+[project]
+name = "mlops-project"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "ju.arroyom@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "pandas (>=2.3.0,<3.0.0)",
+    "xgboost (>=3.0.2,<4.0.0)",
+    "scikit-learn (>=1.7.0,<2.0.0)",
+    "optuna (>=4.4.0,<5.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+notebook = "^7.4.4"
+jupyter = "^1.1.1"
+seaborn = "^0.13.2"
+
