@@ -1,13 +1,11 @@
 
 import pandas as pd
-from pathlib import Path
 from sklearn.model_selection import train_test_split
 
 class Preprocessor:
-    def __init__(self, data:pd.DataFrame, target:str, logger):
+    def __init__(self, data:pd.DataFrame, target:str):
         self.data = data
         self.target = target
-        self.logger = logger
 
     def identify_categorical_encoded_vars(self, maxcat=8):
         self.categorical_vars = []
@@ -49,10 +47,7 @@ class Preprocessor:
                 'y_valid': y_val,}
     
     def build_datasets(self):
-        self.logger.info("Identify Categorical Features")
         self.identify_categorical_encoded_vars()
-        self.logger.info("Identify Numerical Features")
         self.identify_numerical_vars()
-        self.logger.info("Splitting Dataset Train vs. Valid")
         self.data_dict = self.split_datasets()
         

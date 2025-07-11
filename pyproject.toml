@@ -14,7 +14,13 @@ dependencies = [
     "optuna (>=4.4.0,<5.0.0)",
     "pyarrow (>=20.0.0,<21.0.0)",
     "mlflow (>=3.1.1,<4.0.0)",
-    "prefect (>=3.4.7,<4.0.0)"
+    "prefect (>=3.4.7,<4.0.0)",
+    "evidently (>=0.7.9,<0.8.0)",
+    "sqlalchemy (>=2.0.41,<3.0.0)",
+    "streamlit (>=1.46.1,<2.0.0)",
+    "fastapi[standard] (>=0.116.0,<0.117.0)",
+    "uvicorn[standard] (>=0.35.0,<0.36.0)",
+    "psycopg2 (>=2.9.10,<3.0.0)",
 ]
 
 

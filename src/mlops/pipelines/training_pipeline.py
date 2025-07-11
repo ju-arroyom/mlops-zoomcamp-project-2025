@@ -6,7 +6,7 @@ import xgboost as xgb
 from pathlib import Path
 from prefect import flow, get_run_logger, task
 
-from mlops.train.preprocess import Preprocessor
+from mlops.processing.preprocess import Preprocessor
 from mlops.train.optimize_hp import hyperparameter_search
 from mlops.train.register_model import register_model_to_mlflow
 
@@ -21,11 +21,16 @@ def ingest_data():
 
 
 @task
-def preprocess_data(data:pd.DataFrame, logger):
-    preprocess_task = Preprocessor(data=data, target="target", logger=logger)
+def preprocess_data(data:pd.DataFrame):
+    preprocess_task = Preprocessor(data=data, target="target")
     preprocess_task.build_datasets()
     return preprocess_task
 
+@task
+def write_data(data, name):
+    output_dir =  Path(__file__).parent.parent / "data"
+    file_path = output_dir / f"{name}_dataset.parquet"
+    data.to_parquet(file_path)
 
 @flow
 def train_heart_disease_classifier(num_trials: int, top_n:int):
@@ -36,9 +41,12 @@ def train_heart_disease_classifier(num_trials: int, top_n:int):
     logger.info("✅ Ingesting data...")
     data = ingest_data()
     logger.info("🛠️ Preprocessing data...")
-    preprocess_task = preprocess_data(data=data, logger=logger)
+    preprocess_task = preprocess_data(data=data)
     logger.info("🎯 Run Hyperparameter Search")
     hyperparameter_search(data_dict=preprocess_task.data_dict, num_trials=num_trials)
+    logger.info("✅ Write Datasets ...")
+    write_data(preprocess_task.full_df, "train")
+    write_data(preprocess_task.df_test, "test")
     logger.info("🏆 Retrain Model with Best Params")
     mlflow.set_tracking_uri(os.getenv("MLFLOW_TRACKING_URI", "http://localhost:5500"))
     mlflow.set_experiment(os.getenv("EXPERIMENT_NAME", "xgb_best_model"))   
