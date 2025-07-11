@@ -5,7 +5,6 @@ import pandas as pd
 from mlops.inference.predict import load_model, make_prediction
 from mlops.inference.prepare_features import map_data_types
 from mlops.monitoring.metrics_calculation import calculate_metrics, insert_metrics_to_db
-from io import BytesIO
 
 app = FastAPI()
 model = load_model()
