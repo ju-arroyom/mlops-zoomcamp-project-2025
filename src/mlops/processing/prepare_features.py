@@ -14,5 +14,5 @@ REQUIRED_TYPES = {
     "thal": "int64",}
 
 def map_data_types(df):
-    df = df.astype(REQUIRED_TYPES)
+    df = df.astype(REQUIRED_TYPES, errors="raise")
     return df

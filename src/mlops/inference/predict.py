@@ -3,7 +3,8 @@ import mlflow
 import requests
 import pandas as pd
 from pathlib import Path
-from mlops.monitoring.metrics_calculation import calculate_metrics, insert_metrics_to_db
+from mlops.monitoring.metrics_calculation import calculate_metrics
+
 def ingest_data():
     input_dir =  Path(__file__).parent.parent / "data"
     path  = input_dir / "test_dataset.parquet"
@@ -35,11 +36,7 @@ def score_predictions(row):
 
 if __name__ == "__main__":
     df_test = ingest_data()
-    model = load_model()
+    #model = load_model()
     for i in range(len(df_test)):
         print(f"Observation: {i}")
-        X_test = make_prediction(model, df_test.iloc[[i]])
-        print(f"calculate metrics for {i}")
-        metrics = calculate_metrics(X_test)
-        insert_metrics_to_db(metrics=metrics)
-        #score_predictions(df_test.iloc[[i]])
+        score_predictions(df_test.iloc[[i]])

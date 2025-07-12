@@ -1120,14 +1120,14 @@ idna = ">=2.0.0"
 
 [[package]]
 name = "evidently"
-version = "0.7.9"
+version = "0.7.10"
 description = "Open-source tools to analyze, monitor, and debug machine learning model in production."
 optional = false
 python-versions = ">=3.8"
 groups = ["main"]
 files = [
-    {file = "evidently-0.7.9-py3-none-any.whl", hash = "sha256:686f9dffe597e25472295f9ff25dd6854e2361bc48ebb15755e697a46da678bb"},
-    {file = "evidently-0.7.9.tar.gz", hash = "sha256:79df10d99f69f79371c6ee5dab2a9cdd8eed6520896f10ca7e89101ef7a1e01d"},
+    {file = "evidently-0.7.10-py3-none-any.whl", hash = "sha256:f7b924a44894249f10c0bd34c312e5827df83b9596a28a5888e3bf7a462579ed"},
+    {file = "evidently-0.7.10.tar.gz", hash = "sha256:f975123d39a86d8962478583edec5e09f7a5412ef4e8ab342d6cb470ad90df77"},
 ]
 
 [package.dependencies]
@@ -7048,4 +7048,4 @@ type = ["pytest-mypy"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.11,<3.14"
-content-hash = "54c2ac37ddcb96725e94fdc1e88b0ad856c88d3961ee0ff109090f9476904c14"
+content-hash = "d04777958a3945afe4ed9f65f6c43dc5a8c0af514795aa7c5761e560c2517cc1"
