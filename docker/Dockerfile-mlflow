@@ -1,0 +1,18 @@
+FROM python:3.11-slim
+
+RUN pip install --no-cache-dir mlflow[extras]
+
+# Create mlflow directories with permissions
+RUN mkdir -p /mlflow/artifacts && chmod -R 777 /mlflow
+
+WORKDIR /mlflow
+
+
+EXPOSE 5500
+
+ENTRYPOINT ["mlflow", "server", \
+    "--backend-store-uri", "sqlite:///mlflow.db", \
+    # https://github.com/mlflow/mlflow/tree/master/examples/mlflow_artifacts
+    "--artifacts-destination", "./mlflow_server/artifacts", \
+    "--host", "0.0.0.0", \
+    "--port", "5500"]

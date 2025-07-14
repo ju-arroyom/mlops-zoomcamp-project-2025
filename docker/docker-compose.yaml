@@ -1,0 +1,35 @@
+services:
+  mlflow:
+    build:
+      context: .
+      dockerfile: Dockerfile-mlflow
+    image: mlflow_server:latest   # or however you run MLflow
+    ports:
+      - "5500:5500"
+    volumes:
+      - "${PWD}/mlflow_data:/home/mlflow_data"
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile-app
+    image: heart_app:latest
+    environment:
+      - MLFLOW_TRACKING_URI=http://mlflow:5500
+      - METRICS_DB_URI=postgresql://user:pass@db:5432/prediction_metrics
+    depends_on:
+      - mlflow
+      - db
+    ports:
+      - "8080:8080"
+
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: prediction_metrics
+    ports:
+      - "5432:5432"

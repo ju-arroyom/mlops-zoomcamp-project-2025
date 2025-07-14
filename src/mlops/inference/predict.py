@@ -27,7 +27,7 @@ def make_prediction(model, X_test):
 
 
 def score_predictions(row):
-    url = 'http://localhost:8000/predict'
+    url = 'http://localhost:8080/predict'
     row_as_dict = row.to_dict()
     response = requests.post(url, json=row_as_dict) ## post the information in json format
     if response.status_code == 200:

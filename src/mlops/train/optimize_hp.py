@@ -6,12 +6,11 @@ import optuna
 from prefect import task
 from sklearn.metrics import roc_auc_score
 
-mlflow.set_tracking_uri(os.getenv("MLFLOW_TRACKING_URI", "http://localhost:5500"))
-mlflow.set_experiment(os.getenv("OPTUNA_EXPERIMENT", "xgb_optuna_search"))
+mlflow.set_tracking_uri(os.getenv("MLFLOW_TRACKING_URI"))
+mlflow.set_experiment(os.getenv("OPTUNA_EXPERIMENT"))
 
 @task
 def hyperparameter_search(data_dict:dict, num_trials: int):
-
     # Define Matrices
     X_train = xgb.DMatrix(data_dict["x_train"], label=data_dict["y_train"], enable_categorical=True)
     X_val = xgb.DMatrix(data_dict["x_valid"], enable_categorical=True)
@@ -50,7 +49,7 @@ def hyperparameter_search(data_dict:dict, num_trials: int):
                 mlflow.xgboost.log_model(model, 
                                          name=f"xgb-model-{trial.number}", 
                                          model_format="ubj",
-                                         input_example=input_sample)
+                                         input_example=input_sample,)
                 mlflow.set_tag("pipeline", "optuna_hp_search")
 
                 return auc
