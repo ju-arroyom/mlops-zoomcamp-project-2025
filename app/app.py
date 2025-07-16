@@ -1,19 +1,49 @@
+
 import asyncio
 import uvicorn
-from fastapi import FastAPI, Request, BackgroundTasks
-#from fastapi.responses import HTMLResponse, PlainTextResponse
-from datetime import datetime, timedelta, timezone
 import pandas as pd
+from fastapi import FastAPI, Request, BackgroundTasks
+from fastapi.templating import Jinja2Templates
+from fastapi.responses import HTMLResponse
+from datetime import datetime, timezone
+
+from prefect import get_client
+from prefect.client.schemas.sorting import FlowRunSort
 from mlops.inference.predict import load_model, make_prediction
 from mlops.processing.prepare_features import map_data_types
 from mlops.monitoring.metrics_calculation import calculate_metrics, insert_metrics_to_db
 
+
+
 app = FastAPI()
+
+templates = Jinja2Templates(directory="app/templates")
+
+@app.get("/", response_class=HTMLResponse)
+async def read_root(request: Request):
+    latest_run =  await get_most_recent_flow_run()
+    return templates.TemplateResponse("index.html", {
+        "request": request,
+        "mlflow_url": "http://localhost:5500",
+        "streamlit_url": "http://localhost:8501",
+        "prefect_url": "http://localhost:4200",
+        "latest_run": latest_run[0],
+    })
 
 async def delayed_insert(metrics):
     await asyncio.sleep(5)
     insert_ts = datetime.now(timezone.utc)
     insert_metrics_to_db(metrics, insert_ts)
+
+async def get_most_recent_flow_run() -> list:
+    async with get_client() as client:
+        # Read flow runs, sorting by end time in descending order to get the most recent first
+        # Limit to 1 to get only the single most recent flow run
+        recent_flow_runs = await client.read_flow_runs(
+            sort=FlowRunSort.END_TIME_DESC,
+            limit=1,
+        )
+        return recent_flow_runs
 
 @app.post("/predict")
 async def predict(request: Request, background_tasks: BackgroundTasks):

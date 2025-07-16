@@ -38,6 +38,8 @@ def train_heart_disease_classifier(num_trials: int, top_n:int):
     Train Heart Disease Classifier
     """
     logger = get_run_logger()
+    prefect_api_url = os.getenv('PREFECT_API_URL')
+    logger.info(f"Prefect API URL {prefect_api_url}")
     logger.info("✅ Ingesting data...")
     data = ingest_data()
     logger.info("🛠️ Preprocessing data...")

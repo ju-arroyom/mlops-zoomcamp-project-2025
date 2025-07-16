@@ -19,9 +19,25 @@ services:
       - METRICS_DB_URI=postgresql://user:pass@db:5432/prediction_metrics
     depends_on:
       - mlflow
-      - db
     ports:
       - "8080:8080"
+
+  prefect-ui:
+    image: prefecthq/prefect:3.4.7-python3.11
+    command: prefect server start --host 0.0.0.0 --port 4200
+    ports:
+      - "4200:4200"
+
+  trainer:
+    image: heart_app:latest
+    command: poetry run python src/mlops/pipelines/training_pipeline.py
+    environment: 
+      - MLFLOW_TRACKING_URI=http://mlflow:5500
+      - OPTUNA_EXPERIMENT=xgb_optuna_search
+      - PREFECT_API_URL=http://prefect-ui:4200/api # Crucial for connection
+    depends_on:
+      - prefect-ui
+      - api
 
 
   db:
@@ -31,5 +47,18 @@ services:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: pass
       POSTGRES_DB: prediction_metrics
+    depends_on:
+     - api
+     - trainer
     ports:
       - "5432:5432"
+
+  dashboard:
+    image: heart_app:latest   # reuses the same image as FastAPI
+    command: poetry run streamlit run src/mlops/monitoring/dashboard.py --server.port=8501 --server.address=0.0.0.0
+    ports:
+      - "8501:8501"
+    depends_on:
+      - db
+    environment:
+      - METRICS_DB_URI=postgresql://user:pass@db:5432/prediction_metrics

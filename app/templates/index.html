@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My FastAPI Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+    }
+    a {
+      color: #007acc;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to My FastAPI Dashboard</h1>
+
+  <h3>Monitoring Dashboards</h3>
+  <ul>
+    <li>🔗 <a href="{{ mlflow_url }}" target="_blank">MLflow Tracking UI</a></li>
+    <li>📈 <a href="{{ streamlit_url }}" target="_blank">Streamlit Monitoring Dashboard</a></li>
+  </ul>
+
+  <h2>🔁 Latest Prefect Run</h2>
+      <ul>
+          <li><strong>ID:</strong> {{ latest_run.id }}</li>
+          <li><strong>Name:</strong> {{ latest_run.name }}</li>
+          <li><strong>Start Time:</strong> {{ latest_run.start_time }}</li>
+          <li><strong>State:</strong> {{ latest_run.state }}</li>
+          <li><a href="{{ prefect_url }}/runs/flow-run/{{ latest_run.id }}" target="_blank">🔗 View in UI</a></li>
+      </ul>
+  
+</body>
+</html>
