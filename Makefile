@@ -27,6 +27,16 @@ build_app_image:
 build_mlserver_image:
 	docker buildx build -t ${DOCKER_MLFLOW_IMAGE}:${DOCKER_TAG} -f docker/Dockerfile-mlflow .
 
+up_build: build_app_image build_mlserver_image
+	docker-compose -f docker/docker-compose.yaml up
+
+down_build:
+	docker-compose -f docker/docker-compose.yaml down
+
+score_predictions:
+	 python src/mlops/inference/predict.py
+
+# Local test section
 run_training_pipeline:
 	MLFLOW_TRACKING_URI=http://localhost:5500 \
 	OPTUNA_EXPERIMENT=xgb_optuna_search \
