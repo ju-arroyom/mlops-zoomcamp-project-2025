@@ -34,5 +34,6 @@ notebook = "^7.4.4"
 jupyter = "^1.1.1"
 seaborn = "^0.13.2"
 black = "^25.1.0"
+pytest = "^8.4.1"
 
 

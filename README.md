@@ -50,4 +50,13 @@ After seeing this message on your terminal `trainer-1 exited with code 0`, pleas
 make score_predictions
 ```
 
-This command will call predict.py to score the predictions in the test set. The terminal will output the predicted label for each one of the observations and prediction drift metrics will be available in the streamlit dashboard in the link provided in FASTAPI,
+This command will call predict.py to score the predictions in the test set. The terminal will output the predicted label for each one of the observations and prediction drift metrics will be available in the streamlit dashboard in the link provided in FASTAPI.
+
+
+Once you scored predictions and inspected the different links please remember to run:
+
+```
+make down_build
+```
+
+This will stop and remove all the containers that were created as well as networks.
