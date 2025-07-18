@@ -19,6 +19,35 @@ The datset used in this project was downloaded from [Kaggle](https://www.kaggle.
 
 ```
 https://github.com/ju-arroyom/mlops-zoomcamp-project-2025.git
+
 ```
 
-# Run 
+## Local Poetry Setup
+
+
+
+## Run from container
+
+After cloning the repo, please run the following command:
+
+```
+make up_build
+```
+
+This command will build the image for the app `build_app_image` and the image for the mlflow server `build_mlserver_image`.
+
+In addition to this, it will run docker-compose to connect the different elements required for:
+
+- Training pipeline  (mlflow + prefect server)
+
+- Monitoring (Evidently + PostgreSQL + Streamlit)
+
+- Allow visibility of all of these components in FastAPI
+
+After seeing this message on your terminal `trainer-1 exited with code 0`, please run 
+
+```
+make score_predictions
+```
+
+This command will call predict.py to score the predictions in the test set. The terminal will output the predicted label for each one of the observations and prediction drift metrics will be available in the streamlit dashboard in the link provided in FASTAPI,

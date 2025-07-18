@@ -1,0 +1,10 @@
+# Start from the official PostgreSQL image
+FROM postgres:latest
+
+# Set environment variables (you can also use a .env file or Compose)
+ENV POSTGRES_USER=user
+ENV POSTGRES_PASSWORD=pass
+ENV POSTGRES_DB=prediction_metrics
+
+# Optional: expose the port
+EXPOSE 5432
