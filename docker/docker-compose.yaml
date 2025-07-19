@@ -14,11 +14,13 @@ services:
       context: .
       dockerfile: Dockerfile-app
     image: heart_app:latest
+    command: poetry run uvicorn app.app:app --host 0.0.0.0 --port 8080
     environment:
       - MLFLOW_TRACKING_URI=http://mlflow:5500
       - METRICS_DB_URI=postgresql://user:pass@db:5432/prediction_metrics
-    depends_on:
-      - mlflow
+      - PREFECT_API_URL=http://prefect-ui:4200/api
+    
+
     ports:
       - "8080:8080"
 
@@ -36,8 +38,8 @@ services:
       - OPTUNA_EXPERIMENT=xgb_optuna_search
       - PREFECT_API_URL=http://prefect-ui:4200/api # Crucial for connection
     depends_on:
+      - mlflow
       - prefect-ui
-      - api
 
 
   db:
