@@ -33,6 +33,7 @@ def score_predictions(row):
     if response.status_code == 200:
         result = response.json() ## get the server response
         print(result)
+        return result
 
 if __name__ == "__main__":
     df_test = ingest_data()

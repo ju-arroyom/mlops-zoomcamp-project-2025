@@ -31,10 +31,12 @@ https://github.com/ju-arroyom/mlops-zoomcamp-project-2025.git
 After cloning the repo, please run the following command:
 
 ```
+make build_app_image
+make build_mlserver_image
 make up_build
 ```
 
-This command will build the image for the app `build_app_image` and the image for the mlflow server `build_mlserver_image`.
+This commands will build the image for the app `build_app_image` and the image for the mlflow server `build_mlserver_image`.
 
 In addition to this, it will run docker-compose to connect the different elements required for:
 
@@ -43,6 +45,8 @@ In addition to this, it will run docker-compose to connect the different element
 - Monitoring (Evidently + PostgreSQL + Streamlit)
 
 - Allow visibility of all of these components in FastAPI
+
+**Note** docker-compose is not run on detached mode with this make command, you will see the logs.
 
 After seeing this message on your terminal `trainer-1 exited with code 0`, please run 
 

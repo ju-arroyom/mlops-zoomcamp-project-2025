@@ -30,11 +30,6 @@ async def read_root(request: Request):
         "latest_run": latest_run[0],
     })
 
-async def delayed_insert(metrics):
-    await asyncio.sleep(5)
-    insert_ts = datetime.now(timezone.utc)
-    insert_metrics_to_db(metrics, insert_ts)
-
 async def get_most_recent_flow_run() -> list:
     async with get_client() as client:
         # Read flow runs, sorting by end time in descending order to get the most recent first
@@ -44,6 +39,13 @@ async def get_most_recent_flow_run() -> list:
             limit=1,
         )
         return recent_flow_runs
+
+async def delayed_insert(metrics):
+    await asyncio.sleep(5)
+    insert_ts = datetime.now(timezone.utc)
+    insert_metrics_to_db(metrics, insert_ts)
+
+
 
 @app.post("/predict")
 async def predict(request: Request, background_tasks: BackgroundTasks):
