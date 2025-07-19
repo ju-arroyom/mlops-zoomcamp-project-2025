@@ -4,6 +4,23 @@ DOCKER_DB_IMAGE = postgres
 DOCKER_TAG ?= latest
 
 
+# Local poetry install after cloning repo
+install_poetry:
+	@command -v poetry >/dev/null 2>&1 || { \
+		echo "Poetry not found. Installing via pipx..."; \
+		pip install --user pipx; \
+		pipx install poetry; \
+	}
+# Configure poetry and create local venv
+poetry_env:
+	poetry config virtualenvs.in-project true
+	poetry env use python3.10
+
+# Main setup: install poetry, set up venv, install dependencies
+setup_local: install_poetry poetry_env
+	poetry install
+
+
 setup_poetry:
 	@echo "Setting up Poetry"
 	@if [ "$(ROOT)" = "true" ]; then \
