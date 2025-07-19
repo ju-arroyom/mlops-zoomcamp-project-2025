@@ -14,7 +14,6 @@ install_poetry:
 # Configure poetry and create local venv
 poetry_env:
 	poetry config virtualenvs.in-project true
-	poetry env use python3.10
 
 # Main setup: install poetry, set up venv, install dependencies
 setup_local: install_poetry poetry_env

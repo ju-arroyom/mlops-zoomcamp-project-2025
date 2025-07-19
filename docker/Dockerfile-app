@@ -17,7 +17,9 @@ RUN apt-get update && \
 WORKDIR /app
 
 # Copy the rest of the application
-COPY . /app
+COPY app/ app/
+COPY src/ src/
+COPY pyproject.toml poetry.lock Makefile README.md ./
 
 RUN pip install --upgrade pip
 

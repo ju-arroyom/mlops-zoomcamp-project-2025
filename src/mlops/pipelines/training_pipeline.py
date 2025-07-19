@@ -30,7 +30,11 @@ def preprocess_data(data:pd.DataFrame):
 def write_data(data, name):
     output_dir =  Path(__file__).parent.parent / "data"
     file_path = output_dir / f"{name}_dataset.parquet"
-    data.to_parquet(file_path)
+    try:
+        data.to_parquet(file_path)
+        print(f"Writing Data to path: {file_path}")
+    except Exception as e:
+        print(e)
 
 @flow
 def train_heart_disease_classifier(num_trials: int, top_n:int):
