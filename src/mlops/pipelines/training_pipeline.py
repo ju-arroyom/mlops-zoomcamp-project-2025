@@ -34,8 +34,8 @@ def write_data(data, name):
     try:
         data.to_parquet(file_path)
         print(f"Writing Data to path: {file_path}")
-    except Exception as e:
-        print(e)
+    except OSError as e:
+        print(f"❌ File write error: {e}")
 
 
 @flow
