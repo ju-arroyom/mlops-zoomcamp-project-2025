@@ -3,11 +3,20 @@ from sklearn.model_selection import train_test_split
 
 
 class Preprocessor:
+    """
+    Class to preprocess data
+    """
     def __init__(self, data: pd.DataFrame, target: str):
         self.data = data
         self.target = target
 
     def identify_categorical_encoded_vars(self, maxcat=8):
+        """
+        Identify categorical features
+
+        Args:
+            maxcat (int, optional): Max number of unique values. Defaults to 8.
+        """
         self.categorical_vars = []
         for c in self.data.columns:
             unique_values = self.data[c].unique()
@@ -15,12 +24,21 @@ class Preprocessor:
                 self.categorical_vars.append(c)
 
     def identify_numerical_vars(self):
+        """
+        Identify numerical features
+        """
         numerical_vars = self.data.select_dtypes(include="number").columns.to_list()
         self.numerical_vars = [
             x for x in numerical_vars if x not in self.categorical_vars
         ]
 
     def split_datasets(self):
+        """
+        Split original data into train/valid/test
+
+        Returns:
+            dict: Dictionary with training and valid dfs
+        """
         df_full_train, df_test = train_test_split(
             self.data, test_size=0.20, random_state=40
         )
@@ -54,6 +72,9 @@ class Preprocessor:
         }
 
     def build_datasets(self):
+        """
+        Build datasets from raw data
+        """
         self.identify_categorical_encoded_vars()
         self.identify_numerical_vars()
         self.data_dict = self.split_datasets()

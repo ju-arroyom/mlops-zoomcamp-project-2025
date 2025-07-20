@@ -36,5 +36,43 @@ seaborn = "^0.13.2"
 black = "^25.1.0"
 pytest = "^8.4.1"
 pytest-mock = "^3.14.1"
+pylint = "^3.3.7"
+isort = "^6.0.1"
 
+
+[tool.black]
+line-length = 88
+target-version = ["py311"]
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.nox
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+[tool.pylint."MESSAGES CONTROL"]
+
+disable = [
+    "attribute-defined-outside-init",
+    "invalid-name",
+    "missing-module-docstring",
+    "ungrouped-imports",
+    "logging-fstring-interpolation",
+    "no-value-for-parameter"
+    ]
+
+[tool.isort]
+
+multi_line_output = 3
+length_sort = true
 
