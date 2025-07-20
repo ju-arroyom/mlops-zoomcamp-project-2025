@@ -1,8 +1,10 @@
 import os
-import mlflow
-import requests
-import pandas as pd
 from pathlib import Path
+
+import mlflow
+import pandas as pd
+import requests
+
 from mlops.monitoring.metrics_calculation import calculate_metrics
 
 

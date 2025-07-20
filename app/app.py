@@ -1,18 +1,21 @@
 import asyncio
-import uvicorn
-import pandas as pd
-from fastapi import FastAPI, Request, BackgroundTasks
-from fastapi.templating import Jinja2Templates
-from fastapi.responses import HTMLResponse
 from datetime import datetime, timezone
 from urllib.parse import urlparse
 
+import pandas as pd
+import uvicorn
+from fastapi import FastAPI, Request, BackgroundTasks
 from prefect import get_client
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
 from prefect.client.schemas.sorting import FlowRunSort
+
 from mlops.inference.predict import load_model, make_prediction
 from mlops.processing.prepare_features import map_data_types
-from mlops.monitoring.metrics_calculation import calculate_metrics, insert_metrics_to_db
-
+from mlops.monitoring.metrics_calculation import (
+    calculate_metrics,
+    insert_metrics_to_db
+)
 
 app = FastAPI()
 

@@ -1,12 +1,16 @@
 import os
-import sqlalchemy
-import pandas as pd
-from mlops.processing.prepare_features import map_data_types
 from pathlib import Path
-from evidently import Report
-from evidently import DataDefinition, ColumnType
-from evidently import Dataset
-from evidently.metrics import ValueDrift, DriftedColumnsCount, MissingValueCount
+
+import pandas as pd
+import sqlalchemy
+from evidently import Report, Dataset, ColumnType, DataDefinition
+from evidently.metrics import (
+    ValueDrift,
+    MissingValueCount,
+    DriftedColumnsCount
+)
+
+from mlops.processing.prepare_features import map_data_types
 
 
 def read_reference_dataset():

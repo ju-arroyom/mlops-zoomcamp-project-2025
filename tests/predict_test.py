@@ -1,7 +1,13 @@
 import os
-import pandas as pd
+
 import numpy as np
-from src.mlops.inference.predict import load_model, make_prediction, score_predictions
+import pandas as pd
+
+from src.mlops.inference.predict import (
+    load_model,
+    make_prediction,
+    score_predictions
+)
 
 
 def test_load_model(mocker):

@@ -1,7 +1,8 @@
 import os
+
 import mlflow
-import mlflow.xgboost
 import xgboost as xgb
+import mlflow.xgboost
 from prefect import task
 from mlflow.entities import ViewType
 from mlflow.tracking import MlflowClient

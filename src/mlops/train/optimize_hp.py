@@ -1,7 +1,8 @@
 import os
+
 import mlflow
-import xgboost as xgb
 import optuna
+import xgboost as xgb
 from prefect import task
 from sklearn.metrics import roc_auc_score
 

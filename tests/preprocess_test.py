@@ -1,7 +1,8 @@
-import pytest
 import pandas as pd
-from src.mlops.processing.prepare_features import map_data_types
+import pytest
+
 from src.mlops.processing.preprocess import Preprocessor
+from src.mlops.processing.prepare_features import map_data_types
 
 
 @pytest.fixture(name="dataframe")

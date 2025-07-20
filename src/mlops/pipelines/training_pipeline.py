@@ -1,14 +1,15 @@
 import os
-import mlflow
+from pathlib import Path
+
 import click
+import mlflow
 import pandas as pd
 import xgboost as xgb
-from pathlib import Path
-from prefect import flow, get_run_logger, task
+from prefect import flow, task, get_run_logger
 
-from mlops.processing.preprocess import Preprocessor
 from mlops.train.optimize_hp import hyperparameter_search
 from mlops.train.register_model import register_model_to_mlflow
+from mlops.processing.preprocess import Preprocessor
 
 
 @task
