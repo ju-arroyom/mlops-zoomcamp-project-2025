@@ -11,7 +11,9 @@ REQUIRED_TYPES = {
     "oldpeak": "float64",
     "slope": "int64",
     "ca": "int64",
-    "thal": "int64",}
+    "thal": "int64",
+}
+
 
 def map_data_types(df):
     df = df.astype(REQUIRED_TYPES, errors="raise")

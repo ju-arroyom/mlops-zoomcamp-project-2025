@@ -4,17 +4,19 @@ import numpy as np
 from src.mlops.inference.predict import load_model, make_prediction, score_predictions
 
 
-
 def test_load_model(mocker):
     # Create patch for mlflow load fn & model mock
     mock_mlflow = mocker.patch("mlflow.pyfunc.load_model")
     mock_model = mocker.Mock()
     mock_mlflow.return_value = mock_model
     # Mock env vars
-    mocker.patch.dict(os.environ, {
-        "MLFLOW_TRACKING_URI": "http://fake-tracking-uri",
-        "EXPERIMENT_NAME": "fake_experiment"
-    })
+    mocker.patch.dict(
+        os.environ,
+        {
+            "MLFLOW_TRACKING_URI": "http://fake-tracking-uri",
+            "EXPERIMENT_NAME": "fake_experiment",
+        },
+    )
 
     model = load_model()
     mock_mlflow.assert_called_once_with("models:/fake_experiment/latest")
@@ -22,19 +24,23 @@ def test_load_model(mocker):
 
 
 def test_make_prediction(mocker):
-    X_test = pd.DataFrame({'age': [52],
-                        'sex': [1],
-                        'cp': [0],
-                        'trestbps': [125],
-                        'chol': [212],
-                        'fbs': [0],
-                        'restecg': [1],
-                        'thalach': [168],
-                        'exang': [0],
-                        'oldpeak': [1.0],
-                        'slope': [2],
-                        'ca': [2],
-                        'thal': [3]})
+    X_test = pd.DataFrame(
+        {
+            "age": [52],
+            "sex": [1],
+            "cp": [0],
+            "trestbps": [125],
+            "chol": [212],
+            "fbs": [0],
+            "restecg": [1],
+            "thalach": [168],
+            "exang": [0],
+            "oldpeak": [1.0],
+            "slope": [2],
+            "ca": [2],
+            "thal": [3],
+        }
+    )
 
     mock_model = mocker.Mock()
     mock_model.predict.return_value = np.array([0.3])
@@ -48,19 +54,23 @@ def test_make_prediction(mocker):
 def test_score_predictions_success(mocker):
 
     # Create a dummy input row
-    row = pd.Series({'age': [52],
-                        'sex': [1],
-                        'cp': [0],
-                        'trestbps': [125],
-                        'chol': [212],
-                        'fbs': [0],
-                        'restecg': [1],
-                        'thalach': [168],
-                        'exang': [0],
-                        'oldpeak': [1.0],
-                        'slope': [2],
-                        'ca': [2],
-                        'thal': [3]})
+    row = pd.Series(
+        {
+            "age": [52],
+            "sex": [1],
+            "cp": [0],
+            "trestbps": [125],
+            "chol": [212],
+            "fbs": [0],
+            "restecg": [1],
+            "thalach": [168],
+            "exang": [0],
+            "oldpeak": [1.0],
+            "slope": [2],
+            "ca": [2],
+            "thal": [3],
+        }
+    )
 
     # Mock the response from requests.post
     mock_response = mocker.Mock()
@@ -74,7 +84,9 @@ def test_score_predictions_success(mocker):
     result = score_predictions(row)
 
     # Assert requests.post was called correctly
-    mock_post.assert_called_once_with("http://localhost:8080/predict", json=row.to_dict())
+    mock_post.assert_called_once_with(
+        "http://localhost:8080/predict", json=row.to_dict()
+    )
 
     # Assert .json() was called on the response
     mock_response.json.assert_called_once()

@@ -6,8 +6,9 @@ import os
 st.title("Prediction Drift Monitoring")
 
 # Database connection
-DATABASE_URI = os.getenv("METRICS_DB_URI", 
-                          "postgresql://user:pass@localhost:5432/prediction_metrics")
+DATABASE_URI = os.getenv(
+    "METRICS_DB_URI", "postgresql://user:pass@localhost:5432/prediction_metrics"
+)
 engine = create_engine(DATABASE_URI)
 
 # Load metrics

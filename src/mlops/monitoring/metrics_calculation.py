@@ -10,12 +10,13 @@ from evidently.metrics import ValueDrift, DriftedColumnsCount, MissingValueCount
 
 
 def read_reference_dataset():
-        input_dir = Path(__file__).parent.parent / "data"
-        path = input_dir / "train_dataset.parquet"
-        df = pd.read_parquet(path)
-        df.rename(columns={"target": "prediction"}, inplace=True)
-        df["prediction"] = df["prediction"].astype(int)
-        return map_data_types(df)
+    input_dir = Path(__file__).parent.parent / "data"
+    path = input_dir / "train_dataset.parquet"
+    df = pd.read_parquet(path)
+    df.rename(columns={"target": "prediction"}, inplace=True)
+    df["prediction"] = df["prediction"].astype(int)
+    return map_data_types(df)
+
 
 def create_table():
     engine = sqlalchemy.create_engine(
@@ -38,29 +39,35 @@ def create_table():
 
 def calculate_metrics(current_data):
     try:
-        num_features = ['age', 'trestbps', 'chol', 'thalach', 'oldpeak']
+        num_features = ["age", "trestbps", "chol", "thalach", "oldpeak"]
         cat_features = ["sex", "cp", "fbs", "restecg", "exang", "slope", "ca", "thal"]
 
         data_definition = DataDefinition(
-            numerical_columns=num_features+["prediction"],
+            numerical_columns=num_features + ["prediction"],
             categorical_columns=cat_features,
         )
 
-        report = Report(metrics=[
-            ValueDrift(column="prediction"),
-            DriftedColumnsCount(),
-            MissingValueCount(column="prediction"),
-        ])
+        report = Report(
+            metrics=[
+                ValueDrift(column="prediction"),
+                DriftedColumnsCount(),
+                MissingValueCount(column="prediction"),
+            ]
+        )
 
         reference_data = read_reference_dataset()
         # Single rows cause error
         current_data = pd.concat([current_data, current_data], ignore_index=True)
         print(current_data)
         print("Creating current_dataset...")
-        current_dataset = Dataset.from_pandas(current_data, data_definition=data_definition)
+        current_dataset = Dataset.from_pandas(
+            current_data, data_definition=data_definition
+        )
 
         print("Creating reference_dataset...")
-        reference_dataset = Dataset.from_pandas(reference_data, data_definition=data_definition)
+        reference_dataset = Dataset.from_pandas(
+            reference_data, data_definition=data_definition
+        )
 
         print("Running report...")
         run = report.run(reference_data=reference_dataset, current_data=current_dataset)
