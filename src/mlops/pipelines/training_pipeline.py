@@ -4,7 +4,6 @@ from pathlib import Path
 import click
 import mlflow
 import pandas as pd
-import xgboost as xgb
 from prefect import flow, task, get_run_logger
 
 from mlops.train.optimize_hp import hyperparameter_search

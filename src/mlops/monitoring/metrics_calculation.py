@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pandas as pd
 import sqlalchemy
-from evidently import Report, Dataset, ColumnType, DataDefinition
+from evidently import Report, Dataset, DataDefinition
 from evidently.metrics import (
     ValueDrift,
     MissingValueCount,

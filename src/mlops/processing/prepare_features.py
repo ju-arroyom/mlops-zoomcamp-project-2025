@@ -16,5 +16,14 @@ REQUIRED_TYPES = {
 
 
 def map_data_types(df):
+    """
+    Map Datatypes to df
+
+    Args:
+        df (Dataframe): train or test df
+
+    Returns:
+        Dataframe: df with correct types
+    """
     df = df.astype(REQUIRED_TYPES, errors="raise")
     return df
