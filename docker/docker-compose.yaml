@@ -19,8 +19,8 @@ services:
       - MLFLOW_TRACKING_URI=http://mlflow:5500
       - METRICS_DB_URI=postgresql://user:pass@db:5432/prediction_metrics
       - PREFECT_API_URL=http://prefect-ui:4200/api
-    
-
+    volumes:
+      - mlops-data:/app/src/mlops/data
     ports:
       - "8080:8080"
 
@@ -32,6 +32,8 @@ services:
 
   trainer:
     image: heart_app:latest
+    volumes:
+      - mlops-data:/app/src/mlops/data
     command: poetry run python src/mlops/pipelines/training_pipeline.py
     environment: 
       - MLFLOW_TRACKING_URI=http://mlflow:5500
@@ -64,3 +66,6 @@ services:
       - db
     environment:
       - METRICS_DB_URI=postgresql://user:pass@db:5432/prediction_metrics
+
+volumes:
+  mlops-data:
