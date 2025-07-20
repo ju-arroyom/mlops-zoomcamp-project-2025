@@ -24,6 +24,15 @@ https://github.com/ju-arroyom/mlops-zoomcamp-project-2025.git
 
 ## Local Poetry Setup
 
+After cloning the project, it is suggested to install `poetry` to be able to run the script that scores predictions.
+
+Please run the following command on your machine:
+
+```
+make setup_poetry_local
+```
+
+This command will first check for a poetry installation, if you don't have one it will install poetry via pipx.
 
 
 ## Run from container
@@ -32,7 +41,9 @@ After cloning the repo, please run the following command:
 
 ```
 make build_app_image
+
 make build_mlserver_image
+
 make up_build
 ```
 
@@ -51,10 +62,16 @@ In addition to this, it will run docker-compose to connect the different element
 After seeing this message on your terminal `trainer-1 exited with code 0`, please run 
 
 ```
+
 make score_predictions
+
 ```
 
-This command will call predict.py to score the predictions in the test set. The terminal will output the predicted label for each one of the observations and prediction drift metrics will be available in the streamlit dashboard in the link provided in FASTAPI.
+This command will call `src/mlops/inference/predict.py` to score the predictions in the test set. The terminal will output the predicted label for each one of the observations and prediction drift metrics will be available in the streamlit dashboard in the link provided in FASTAPI [http://localhost:8080/](http://localhost:8080/).
+
+<p align="center" width="100%">
+  <img src="img/app_screenshot.png" width="300" height="400" class="center">
+</p>
 
 
 Once you scored predictions and inspected the different links please remember to run:
