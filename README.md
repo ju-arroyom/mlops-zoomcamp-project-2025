@@ -70,7 +70,7 @@ make score_predictions
 This command will call `src/mlops/inference/predict.py` to score the predictions in the test set. The terminal will output the predicted label for each one of the observations and prediction drift metrics will be available in the streamlit dashboard in the link provided in FASTAPI [http://localhost:8080/](http://localhost:8080/).
 
 <p align="center" width="100%">
-  <img src="img/app_screenshot.png" width="300" height="400" class="center">
+  <img src="img/app_screenshot.png" width="600" height="700" class="center">
 </p>
 
 
