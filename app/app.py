@@ -6,6 +6,7 @@ from fastapi import FastAPI, Request, BackgroundTasks
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 from datetime import datetime, timezone
+from urllib.parse import urlparse
 
 from prefect import get_client
 from prefect.client.schemas.sorting import FlowRunSort
@@ -22,11 +23,17 @@ templates = Jinja2Templates(directory="app/templates")
 @app.get("/", response_class=HTMLResponse)
 async def read_root(request: Request):
     latest_run =  await get_most_recent_flow_run()
+    # Get base url
+    base_url = str(request.base_url)
+    mlflow_url = base_url.replace(str(request.url.port), "5500")
+    streamlit_url = base_url.replace(str(request.url.port), "8501")
+    prefect_url = base_url.replace(str(request.url.port), "4200")
+
     return templates.TemplateResponse("index.html", {
         "request": request,
-        "mlflow_url": "http://localhost:5500",
-        "streamlit_url": "http://localhost:8501",
-        "prefect_url": "http://localhost:4200",
+        "mlflow_url": mlflow_url,
+        "streamlit_url": streamlit_url,
+        "prefect_url": prefect_url,
         "latest_run": latest_run[0],
     })
 

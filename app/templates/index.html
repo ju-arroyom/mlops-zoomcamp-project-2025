@@ -16,21 +16,22 @@
   </style>
 </head>
 <body>
-  <h1>Welcome to My FastAPI Dashboard</h1>
+  <h1>Welcome to Heart Disease Classifier App </h1>
 
-  <h3>Monitoring Dashboards</h3>
+  <h2>Monitoring Dashboards</h2>
   <ul>
-    <li>🔗 <a href="{{ mlflow_url }}" target="_blank">MLflow Tracking UI</a></li>
-    <li>📈 <a href="{{ streamlit_url }}" target="_blank">Streamlit Monitoring Dashboard</a></li>
+    <li>🧪 <a href="{{ mlflow_url }}" target="_blank">MLflow Tracking UI</a></li>
+    <li>📈 <a href="{{ streamlit_url }}" target="_blank">Streamlit Dashboard Drift Monitoring </a></li>
+    <p> ⚠️ The streamlit dashboard will become available once predictions have been scored.</p>
   </ul>
 
-  <h2>🔁 Latest Prefect Run</h2>
+  <h3>🔄 Latest Prefect Run for Training Pipeline</h3>
       <ul>
           <li><strong>ID:</strong> {{ latest_run.id }}</li>
           <li><strong>Name:</strong> {{ latest_run.name }}</li>
           <li><strong>Start Time:</strong> {{ latest_run.start_time }}</li>
           <li><strong>State:</strong> {{ latest_run.state }}</li>
-          <li><a href="{{ prefect_url }}/runs/flow-run/{{ latest_run.id }}" target="_blank">🔗 View in UI</a></li>
+          <li><a href="{{ prefect_url }}runs/flow-run/{{ latest_run.id }}" target="_blank">🔗 View in UI</a></li>
       </ul>
   
 </body>

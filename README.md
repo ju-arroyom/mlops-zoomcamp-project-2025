@@ -6,7 +6,7 @@ The goal of this project is to develop and build a MLOps pipeline to build and d
 
 ## Dataset
 
-The datset used in this project was downloaded from [Kaggle](https://www.kaggle.com/datasets/iamtanmayshukla/cardiac-arrest-dataset/data). It comprises five widely used heart disease datatsets available indepedently on the [UCI Machine Learning Repository](https://archive.ics.uci.edu/).
+The dataset used in this project was downloaded from [Kaggle](https://www.kaggle.com/datasets/iamtanmayshukla/cardiac-arrest-dataset/data). It comprises five widely used heart disease datasets available indepedently on the [UCI Machine Learning Repository](https://archive.ics.uci.edu/).
 
 - Total Instances: 1026 patients
 
