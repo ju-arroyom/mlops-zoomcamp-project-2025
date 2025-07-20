@@ -16,19 +16,12 @@ poetry_env:
 	poetry config virtualenvs.in-project true
 
 # Main setup: install poetry, set up venv, install dependencies
-setup_local: install_poetry poetry_env
+setup_poetry_local: install_poetry poetry_env
 	poetry install
 
 
 setup_poetry:
 	@echo "Setting up Poetry"
-	@if [ "$(ROOT)" = "true" ]; then \
-		apt-get update; \
-		apt-get install -y pipx; \
-	else \
-		sudo apt-get update; \
-		sudo apt-get install -y pipx; \
-	fi
 	pipx ensurepath
 	pipx install poetry --python $(shell which python)
 

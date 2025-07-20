@@ -1,8 +1,5 @@
 services:
   mlflow:
-    build:
-      context: .
-      dockerfile: Dockerfile-mlflow
     image: mlflow_server:latest   # or however you run MLflow
     ports:
       - "5500:5500"
@@ -14,7 +11,7 @@ services:
       context: .
       dockerfile: Dockerfile-app
     image: heart_app:latest
-    command: poetry run uvicorn app.app:app --host 0.0.0.0 --port 8080
+    command: poetry run python app/app.py
     environment:
       - MLFLOW_TRACKING_URI=http://mlflow:5500
       - METRICS_DB_URI=postgresql://user:pass@db:5432/prediction_metrics

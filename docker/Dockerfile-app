@@ -10,7 +10,8 @@ ENV PATH="/root/.local/bin:${PATH}"
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
       make \
-      curl && \
+      curl \
+      pipx && \
     rm -rf /var/lib/apt/lists/*
 
 # Working directory
@@ -25,12 +26,9 @@ RUN pip install --upgrade pip
 
 # Setup Poetry
 
-RUN make setup_poetry ROOT="true"
-RUN poetry config virtualenvs.create false 
+RUN make setup_poetry
+RUN poetry config virtualenvs.create true 
 RUN make install_dependecies_no_dev
 
 # Expose FastAPI app port
 EXPOSE 8080
-
-# Run the FastAPI app (assumes it lives in mlops/app/app.py)
-#CMD ["poetry", "run", "uvicorn", "app.app:app", "--host", "0.0.0.0", "--port", "8080"]
