@@ -22,13 +22,29 @@ def ingest_data():
 
 @task
 def preprocess_data(data: pd.DataFrame):
+    """
+    Run Preprocessor class
+
+    Args:
+        data (pd.DataFrame): df to process
+
+    Returns:
+        Dataframe: Processed dataframe
+    """
     preprocess_task = Preprocessor(data=data, target="target")
     preprocess_task.build_datasets()
     return preprocess_task
 
 
 @task
-def write_data(data, name):
+def write_data(data: pd.DataFrame, name:str):
+    """
+    Write datasets to folder
+
+    Args:
+        data (pd.DataFrame): df to write
+        name (str): name of the dataframe (train/test)
+    """
     output_dir = Path(__file__).parent.parent / "data"
     file_path = output_dir / f"{name}_dataset.parquet"
     try:
@@ -73,6 +89,7 @@ def train_heart_disease_classifier(num_trials: int, top_n: int):
     help="Number of top models that need to be evaluated to decide which one to promote",
 )
 def main(num_trials, top_n):
+    """Main function to run pipeline"""
     train_heart_disease_classifier(num_trials=num_trials, top_n=top_n)
 
 

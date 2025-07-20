@@ -14,6 +14,12 @@ from mlops.processing.prepare_features import map_data_types
 
 
 def read_reference_dataset():
+    """
+    Read reference dataset
+
+    Returns:
+        Dataframe: Pandas df for reference data
+    """
     input_dir = Path(__file__).parent.parent / "data"
     path = input_dir / "train_dataset.parquet"
     df = pd.read_parquet(path)
@@ -23,6 +29,12 @@ def read_reference_dataset():
 
 
 def create_table():
+    """
+    Create Database for prediction metrics
+
+    Returns:
+        tuple: Tuple with connection engine and table object
+    """
     engine = sqlalchemy.create_engine(
         os.getenv(
             "METRICS_DB_URI", "postgresql://user:pass@localhost:5432/prediction_metrics"
@@ -42,6 +54,15 @@ def create_table():
 
 
 def calculate_metrics(current_data):
+    """
+    Calculate drift metrics for prediction
+
+    Args:
+        current_data (pd.Dataframe): Single row to predcit
+
+    Returns:
+        dict: Dictionary with metrics results
+    """
     try:
         num_features = ["age", "trestbps", "chol", "thalach", "oldpeak"]
         cat_features = ["sex", "cp", "fbs", "restecg", "exang", "slope", "ca", "thal"]
@@ -91,6 +112,13 @@ def calculate_metrics(current_data):
 
 
 def insert_metrics_to_db(metrics: dict, timestamp):
+    """
+    Insert metrics to db
+
+    Args:
+        metrics (dict): Dictionary with metrics from prediction
+        timestamp (timestamp): Timestamp for prediction
+    """
     engine, metrics_table = create_table()
     metrics["timestamp"] = timestamp
     with engine.begin() as conn:
