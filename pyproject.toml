@@ -38,6 +38,7 @@ pytest = "^8.4.1"
 pytest-mock = "^3.14.1"
 pylint = "^3.3.7"
 isort = "^6.0.1"
+pre-commit = "^4.2.0"
 
 
 [tool.black]
@@ -75,4 +76,3 @@ disable = [
 
 multi_line_output = 3
 length_sort = true
-
