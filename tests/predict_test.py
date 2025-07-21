@@ -3,11 +3,7 @@ import os
 import numpy as np
 import pandas as pd
 
-from src.mlops.inference.predict import (
-    load_model,
-    make_prediction,
-    score_predictions
-)
+from src.mlops.inference.predict import load_model, make_prediction, score_predictions
 
 
 def test_load_model(mocker):
@@ -91,7 +87,7 @@ def test_score_predictions_success(mocker):
 
     # Assert requests.post was called correctly
     mock_post.assert_called_once_with(
-        "http://localhost:8080/predict", json=row.to_dict()
+        "http://localhost:8080/predict", json=row.to_dict(), timeout=10
     )
 
     # Assert .json() was called on the response
