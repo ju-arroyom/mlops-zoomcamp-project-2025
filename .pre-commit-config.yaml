@@ -24,22 +24,22 @@ repos:
         args: [
             "tests/"
         ]
-# -   repo: https://github.com/pycqa/isort
-#     rev: 5.11.5
-#     hooks:
-#       - id: isort
-#         name: isort (python)
-# -   repo: local
-#     hooks:
-#       - id: pylint
-#         name: pylint
-#         entry: pylint
-#         language: system
-#         types: [python]
-#         require_serial: true
-#         args:
-#             [
-#             "-rn", # Only display messages
-#             "-sn", # Don't display the score
-#             "--recursive=y"
-#             ]
+-   repo: https://github.com/pycqa/isort
+    rev: 5.11.5
+    hooks:
+      - id: isort
+        name: isort (python)
+-   repo: local
+    hooks:
+      - id: pylint
+        name: pylint
+        entry: pylint
+        language: system
+        types: [python]
+        require_serial: true
+        args:
+            [
+            "-rn", # Only display messages
+            "-sn", # Don't display the score
+            "--recursive=y src/mlops"
+            ]
