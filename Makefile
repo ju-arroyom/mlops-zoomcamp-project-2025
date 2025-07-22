@@ -63,3 +63,6 @@ quality_checks:
 	isort .
 	black .
 	pylint -j 0 --recursive=y src/mlops
+
+run_unit_tests:
+	pytest tests/
