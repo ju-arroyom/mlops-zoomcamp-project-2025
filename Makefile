@@ -19,7 +19,6 @@ poetry_env:
 setup_poetry_local: install_poetry poetry_env
 	poetry install
 
-
 setup_poetry:
 	@echo "Setting up Poetry"
 	pipx ensurepath
