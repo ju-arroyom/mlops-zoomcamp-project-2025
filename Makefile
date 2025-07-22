@@ -56,3 +56,10 @@ down_build:
 
 score_predictions:
 	 poetry run python src/mlops/inference/predict.py
+
+# Quality checks
+
+quality_checks:
+	isort .
+	black .
+	pylint -j 0 --recursive=y src/mlops
