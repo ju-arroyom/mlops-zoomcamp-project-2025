@@ -50,7 +50,7 @@ def make_prediction(model, X_test):
     return X_test
 
 
-def score_predictions(row:pd.Series):
+def score_predictions(row: pd.Series):
     """
     Score predictions
 
@@ -63,8 +63,7 @@ def score_predictions(row:pd.Series):
     url = "http://localhost:8080/predict"
     row_as_dict = row.to_dict()
     response = requests.post(
-        url, json=row_as_dict,
-        timeout=10
+        url, json=row_as_dict, timeout=10
     )  ## post the information in json format
     try:
         result = response.json()  ## get the server response

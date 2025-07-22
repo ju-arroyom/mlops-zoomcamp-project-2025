@@ -6,6 +6,7 @@ class Preprocessor:
     """
     Class to preprocess data
     """
+
     def __init__(self, data: pd.DataFrame, target: str):
         self.data = data
         self.target = target

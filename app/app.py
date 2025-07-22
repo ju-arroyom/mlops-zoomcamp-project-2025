@@ -12,10 +12,7 @@ from prefect.client.schemas.sorting import FlowRunSort
 
 from mlops.inference.predict import load_model, make_prediction
 from mlops.processing.prepare_features import map_data_types
-from mlops.monitoring.metrics_calculation import (
-    calculate_metrics,
-    insert_metrics_to_db
-)
+from mlops.monitoring.metrics_calculation import calculate_metrics, insert_metrics_to_db
 
 app = FastAPI()
 

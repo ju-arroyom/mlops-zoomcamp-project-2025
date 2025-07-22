@@ -4,11 +4,7 @@ from pathlib import Path
 import pandas as pd
 import sqlalchemy
 from evidently import Report, Dataset, DataDefinition
-from evidently.metrics import (
-    ValueDrift,
-    MissingValueCount,
-    DriftedColumnsCount
-)
+from evidently.metrics import ValueDrift, MissingValueCount, DriftedColumnsCount
 
 from mlops.processing.prepare_features import map_data_types
 

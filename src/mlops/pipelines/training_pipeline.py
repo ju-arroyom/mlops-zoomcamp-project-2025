@@ -37,7 +37,7 @@ def preprocess_data(data: pd.DataFrame):
 
 
 @task
-def write_data(data: pd.DataFrame, name:str):
+def write_data(data: pd.DataFrame, name: str):
     """
     Write datasets to folder
 
