@@ -65,3 +65,6 @@ quality_checks:
 
 run_unit_tests:
 	poetry run pytest -v
+
+integration_test:
+	bash integration_tests/run_s3_integration.sh

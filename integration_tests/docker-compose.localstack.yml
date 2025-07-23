@@ -1,0 +1,9 @@
+services:
+  localstack:
+    image: localstack/localstack:latest
+    ports:
+      - "4566:4566" # Default LocalStack edge port
+    environment:
+      - SERVICES=s3 # Specify S3 as a service to enable
+      - HOSTNAME=localstack
+      - DEFAULT_REGION=us-east-1 # Set a default AWS region
