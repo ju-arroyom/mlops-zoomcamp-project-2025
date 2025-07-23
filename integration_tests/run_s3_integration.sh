@@ -19,7 +19,7 @@ export PREFECT_API_URL=http://localhost:4200/api # Crucial for connection
 export STORAGE_TYPE=s3
 
 # Build mlflow server image
-docker buildx build -t ${DOCKER_MLFLOW_IMAGE}:${DOCKER_TAG} -f docker/Dockerfile-mlflow ..
+docker buildx build -t ${DOCKER_MLFLOW_IMAGE}:${DOCKER_TAG} -f ../docker/Dockerfile-mlflow ..
 
 docker-compose \
   -f ../docker/docker-compose.yaml \
