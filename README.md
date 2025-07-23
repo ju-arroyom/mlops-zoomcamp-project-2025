@@ -22,7 +22,7 @@ https://github.com/ju-arroyom/mlops-zoomcamp-project-2025.git
 
 ```
 
-## Local Poetry Setup
+## Local Poetry Setup (Python >= 3.10)
 
 After cloning the project, it is suggested to install `poetry` to be able to run the script that scores predictions.
 
@@ -82,6 +82,15 @@ make down_build
 
 This will stop and remove all the containers that were created as well as networks and volumes.
 
+# Want to run test locally?
+
+```
+make run_unit_tests
+
+make integration_test
+```
+
+
 ## Currently Supported
 
  - [x] Orchestration with Docker Compose
@@ -90,4 +99,4 @@ This will stop and remove all the containers that were created as well as networ
  - [x] Linter and code formatter (make quality_checks)
  - [x] Makefile to automate different tasks
  - [x] Pre-commit hooks for code formatting and running tests
- - [x] CI Pipeline (Github Actions) for unit tests
+ - [x] CI Pipeline (Github Actions) for unit and integration tests
