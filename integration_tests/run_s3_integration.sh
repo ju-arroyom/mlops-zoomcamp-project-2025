@@ -4,9 +4,11 @@ if [[ -z "${GITHUB_ACTIONS}" ]]; then
   cd "$(dirname "$0")"
 fi
 
-
+# Important vars
 BUCKET=s3://heart-app
 NUM_TRIALS=5
+DOCKER_MLFLOW_IMAGE=mlflow_server
+DOCKER_TAG=latest
 # Set environmental vars
 export S3_BUCKET=heart-app
 export AWS_ACCESS_KEY_ID=test
@@ -16,6 +18,8 @@ export OPTUNA_EXPERIMENT=xgb_optuna_search
 export PREFECT_API_URL=http://localhost:4200/api # Crucial for connection
 export STORAGE_TYPE=s3
 
+# Build mlflow server image
+docker buildx build -t ${DOCKER_MLFLOW_IMAGE}:${DOCKER_TAG} -f docker/Dockerfile-mlflow .
 
 docker-compose \
   -f ../docker/docker-compose.yaml \
