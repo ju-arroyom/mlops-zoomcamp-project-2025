@@ -84,10 +84,10 @@ This will stop and remove all the containers that were created as well as networ
 
 ## Currently Supported
 
- [x] Orchestration with Docker Compose
- [x] Experiment tracking + Model Registry
- [x] Unit tests
- [x] Linter and code formatter (make quality_checks)
- [x] Makefile to automate different tasks
- [x] Pre-commit hooks for code formatting and running tests
- [x] CI Pipeline (Github Actions) for unit tests
+ - [x] Orchestration with Docker Compose
+ - [x] Experiment tracking + Model Registry
+ - [x] Unit tests
+ - [x] Linter and code formatter (make quality_checks)
+ - [x] Makefile to automate different tasks
+ - [x] Pre-commit hooks for code formatting and running tests
+ - [x] CI Pipeline (Github Actions) for unit tests
