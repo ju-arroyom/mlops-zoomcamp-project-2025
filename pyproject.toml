@@ -22,6 +22,7 @@ dependencies = [
     "uvicorn[standard] (>=0.35.0,<0.36.0)",
     "psycopg2-binary (>=2.9.10,<3.0.0)",
     "jinja2 (>=3.1.6,<4.0.0)",
+    "s3fs (>=2025.7.0,<2026.0.0)",
 ]
 
 
@@ -36,9 +37,10 @@ seaborn = "^0.13.2"
 black = "^25.1.0"
 pytest = "^8.4.1"
 pytest-mock = "^3.14.1"
-pylint = "^3.3.7"
 isort = "^6.0.1"
 pre-commit = "^4.2.0"
+ruff = "^0.12.4"
+localstack = "^4.6.0"
 
 
 [tool.black]
@@ -61,18 +63,11 @@ exclude = '''
 )/
 '''
 
-[tool.pylint."MESSAGES CONTROL"]
-
-disable = [
-    "attribute-defined-outside-init",
-    "invalid-name",
-    "missing-module-docstring",
-    "ungrouped-imports",
-    "logging-fstring-interpolation",
-    "no-value-for-parameter"
-    ]
+[tool.ruff]
+line-length = 100
+target-version = "py311"
 
 [tool.isort]
-
 multi_line_output = 3
 length_sort = true
+extend-select = ["PL"]

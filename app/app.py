@@ -1,6 +1,5 @@
 import asyncio
 from datetime import datetime, timezone
-from urllib.parse import urlparse
 
 import pandas as pd
 import uvicorn
