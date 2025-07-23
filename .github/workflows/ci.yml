@@ -39,4 +39,4 @@ jobs:
       - name: Integration tests
         working-directory: 'integration_tests'
         run: |
-          ./integration-tests/run_s3_integration.sh
+          . run_s3_integration.sh
