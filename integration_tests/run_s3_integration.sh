@@ -13,6 +13,7 @@ DOCKER_TAG=latest
 export S3_BUCKET=heart-app
 export AWS_ACCESS_KEY_ID=test
 export AWS_SECRET_ACCESS_KEY=test
+export AWS_REGION=us-east-1
 export MLFLOW_TRACKING_URI=http://localhost:5500
 export OPTUNA_EXPERIMENT=xgb_optuna_search
 export PREFECT_API_URL=http://localhost:4200/api # Crucial for connection
