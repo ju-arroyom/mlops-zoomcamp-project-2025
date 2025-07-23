@@ -63,18 +63,6 @@ exclude = '''
 )/
 '''
 
-[tool.pylint."MESSAGES CONTROL"]
-
-disable = [
-    "attribute-defined-outside-init",
-    "invalid-name",
-    "missing-module-docstring",
-    "ungrouped-imports",
-    "logging-fstring-interpolation",
-    "no-value-for-parameter"
-    ]
-
 [tool.isort]
-
 multi_line_output = 3
 length_sort = true
