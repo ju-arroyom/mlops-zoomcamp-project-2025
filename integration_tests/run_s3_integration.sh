@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
-cd "$(dirname "$0")"
+if [[ -z "${GITHUB_ACTIONS}" ]]; then
+  cd "$(dirname "$0")"
+fi
+
 
 BUCKET=s3://heart-app
 NUM_TRIALS=5
