@@ -61,7 +61,7 @@ score_predictions:
 quality_checks:
 	isort .
 	black .
-	pylint -j 0 --recursive=y src/mlops
+	ruff check src/mlops
 
 run_unit_tests:
 	poetry run pytest -v

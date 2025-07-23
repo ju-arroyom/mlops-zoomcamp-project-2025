@@ -14,10 +14,16 @@ from mlops.processing.preprocess import Preprocessor
 @task
 def ingest_data():
     """Ingest data from a source"""
-    input_dir = Path(__file__).parent.parent / "data"
-    file_path = input_dir / "cardiac_arrest_dataset.csv"
-    heart_df = pd.read_csv(file_path)
-    return heart_df
+    storage_type = os.getenv("STORAGE_TYPE", "local")
+    if storage_type == "s3":
+        bucket = os.getenv("S3_BUCKET", "my-bucket")
+        file_path = f"s3://{bucket}/data/cardiac_arrest_dataset.csv"
+        storage_options = {"client_kwargs": {"endpoint_url": "http://localhost:4566"}}
+        return pd.read_csv(file_path, storage_options=storage_options)
+    else:
+        input_dir = Path(__file__).parent.parent / "data"
+        file_path = input_dir / "cardiac_arrest_dataset.csv"
+        return pd.read_csv(file_path)
 
 
 @task
@@ -45,10 +51,22 @@ def write_data(data: pd.DataFrame, name: str):
         data (pd.DataFrame): df to write
         name (str): name of the dataframe (train/test)
     """
-    output_dir = Path(__file__).parent.parent / "data"
-    file_path = output_dir / f"{name}_dataset.parquet"
+    storage_type = os.getenv("STORAGE_TYPE", "local")
+    if storage_type == "s3":
+        bucket = os.getenv("S3_BUCKET", "my-bucket")
+        file_path = f"s3://{bucket}/data/{name}_dataset.parquet"
+    else:
+        output_dir = Path(__file__).parent.parent / "data"
+        file_path = output_dir / f"{name}_dataset.parquet"
     try:
-        data.to_parquet(file_path)
+        data.to_parquet(
+            file_path,
+            storage_options=(
+                {"client_kwargs": {"endpoint_url": "http://localhost:4566"}}
+                if storage_type == "s3"
+                else None
+            ),
+        )
         print(f"Writing Data to path: {file_path}")
     except OSError as e:
         print(f"❌ File write error: {e}")
