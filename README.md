@@ -15,7 +15,7 @@ The dataset used in this project was downloaded from [Kaggle](https://www.kaggle
 - Target Variable: Presence or absence of coronary artery disease (CAD)
 
 
-## Clone the Project 
+## Clone the Project
 
 ```
 https://github.com/ju-arroyom/mlops-zoomcamp-project-2025.git
@@ -59,7 +59,7 @@ In addition to this, it will run docker-compose to connect the different element
 
 **Note** docker-compose is not run on detached mode with this make command, you will see the logs.
 
-After seeing this message on your terminal `trainer-1 exited with code 0`, please run 
+After seeing this message on your terminal `trainer-1 exited with code 0`, please run
 
 ```
 
@@ -81,3 +81,13 @@ make down_build
 ```
 
 This will stop and remove all the containers that were created as well as networks.
+
+## Currently Supported
+
+ [x] Orchestration with Docker Compose
+ [x] Experiment tracking + Model Registry
+ [x] Unit tests
+ [x] Linter and code formatter (make quality_checks)
+ [x] Makefile to automate different tasks
+ [x] Pre-commit hooks for code formatting and running tests
+ [x] CI Pipeline (Github Actions) for unit tests
