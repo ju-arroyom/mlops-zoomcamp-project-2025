@@ -100,3 +100,4 @@ make integration_test
  - [x] Makefile to automate different tasks
  - [x] Pre-commit hooks for code formatting and running tests
  - [x] CI Pipeline (Github Actions) for unit and integration tests
+ - [x] Sample use of localstack in training pipeline
