@@ -35,7 +35,7 @@ make setup_poetry_local
 This command will first check for a poetry installation, if you don't have one it will install poetry via pipx.
 
 
-## Run from container
+## Run from Container
 
 After cloning the repo, please run the following command:
 
@@ -49,7 +49,7 @@ make up_build
 
 This commands will build the image for the app `build_app_image` and the image for the mlflow server `build_mlserver_image`.
 
-In addition to this, it will run docker-compose to connect the different elements required for:
+The `up_build` command will run docker-compose to connect the different elements required for:
 
 - Training pipeline  (mlflow + prefect server)
 
@@ -74,13 +74,13 @@ This command will call `src/mlops/inference/predict.py` to score the predictions
 </p>
 
 
-Once you scored predictions and inspected the different links please remember to run:
+Once you scored the predictions and inspected the different links please remember to run:
 
 ```
 make down_build
 ```
 
-This will stop and remove all the containers that were created as well as networks.
+This will stop and remove all the containers that were created as well as networks and volumes.
 
 ## Currently Supported
 
