@@ -63,6 +63,11 @@ exclude = '''
 )/
 '''
 
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
 [tool.isort]
 multi_line_output = 3
 length_sort = true
+extend-select = ["PL"]
